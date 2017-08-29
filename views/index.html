@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Bala</title>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    </head>
+    <body>
+        <h1>Index HTML</h1>
+        <button id="button1" onclick="clicked()">Click me..!</button>
+        <p id="p1"></p>
+        <p id="dataPara"></p>
+        
+        <script>
+            $(document).ready(function(){
+                $("#button1").click(function(){
+                    $("#p1").html("Button clicked to get the data from back-end API");
+                });
+            });
+
+            // Call our ajax endpoint on the server
+            function clicked() {
+                $.ajax({
+                    url: '/APIcall',
+                    method: 'GET',
+                    dataType: 'json'
+                }).done(function(data) {
+                    alert("Success..!");
+                    $("#dataPara").html("Data from API call: " + data.name);
+                }).fail(function(error) {
+                    alert("Error..!");
+                    alert(JSON.stringify(error));
+                });
+            }
+        </script>
+    </body>
+</html>
